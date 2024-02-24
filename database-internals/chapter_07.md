@@ -26,3 +26,4 @@ It quickly becomes evident that after multiple flushes we’ll end up with multi
 
 A priority queue is a data structure used for maintaining an ordered queue of items. While a regular queue retains items in order of their addition (first in, first out), a priority queue re-sorts items on insertion and the item with the highest (or lowest) priority is placed in the head of the queue. This is particularly useful for merge-iteration, since we have to output elements in a sorted order.
 
+An operation that inserts the record to the database if it does not exist, and updates an existing one otherwise, is called an upsert. In LSM Trees, insert and update operations are indistinguishable, since they do not attempt to locate data records previously associated with the key in all sources and reassign its value, so we can say that we upsert records by default.
