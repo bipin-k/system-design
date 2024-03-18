@@ -27,3 +27,16 @@ The non-repeatable read anomaly occurs when a transaction reads one and the same
 #### Phantom Reads and Repeatable Read
 The phantom read anomaly occurs when one and the same transaction executes two identical queries returning a set of rows that satisfy a particular condition, while another transaction adds some other rows satisfying this condition and commits the changes in the time interval between these queries. As a result, the first transaction gets two different sets of rows.
 
+#### No Anomalies and Serializable
+The standard also defines the Serializable level, which does not allow any anoma lies. It is not the same as the ban on lost updates and dirty, non-repeatable, and  phantom reads. The Serializable level must prevent any anomalies. It means that the application developer does not have to take isolation into account. If transactions execute correct operator sequences when run on their own, concurrent execution cannot break data consistency either.
+
+|                  | LOST UPDATE | DIRTY READ | NON- REPEATABLE READ | PHANTOM READ | OTHER ANOMALIES |
+|:----------------:|:-----------:|:----------:|:--------------------:|:------------:|:---------------:|
+| READ UNCOMMITTED |             |     X      |          X           |      X       |        X        |
+|  READ COMMITTED  |             |            |          X           |      X       |        X        |
+| REPEATABLE READ  |             |            |                      |      X       |        X        |
+|   SERIALIZABLE   |             |            |                      |              |                 |
+
+#### Why These Anomalies?
+The widely used two-phase locking protocol (2PL) requires transactions to lock the affected rows during execution and release the locks upon completion. In simplistic terms, the more locks a transaction acquires, the better it is isolated from other transactions. And consequently, the worse is the system performance, as transactions start queuing to get access to the same rows instead of running concurrently.
+
