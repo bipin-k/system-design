@@ -1,7 +1,7 @@
-## Chapter 1
-### Introduction
+## Chapter 02
+### Isolation
 
-The key feature of relational databases is their ability to ensure data consistency, that is, data correctness. It is a known fact that at the database level it is possible to create integrity constraints, such as NOT NULL or UNIQUE.
+The key feature of relational databases is their ability to ensure data consistency, that is, data correctness. It is a known fact that at the database level it is possible to create integrity constraints, such as NOT NULL or UNIQUE. The database system ensures that these constraints are never broken, so data integrity is never compromised.
 
 Transaction isolation levels are a measure of the extent to which transaction isolation succeeds. In particular, transaction isolation levels are defined by the presence or absence of the following phenomena:
 
@@ -39,4 +39,21 @@ The standard also defines the Serializable level, which does not allow any anoma
 
 #### Why These Anomalies?
 The widely used two-phase locking protocol (2PL) requires transactions to lock the affected rows during execution and release the locks upon completion. In simplistic terms, the more locks a transaction acquires, the better it is isolated from other transactions. And consequently, the worse is the system performance, as transactions start queuing to get access to the same rows instead of running concurrently.
+
+If the rows to be updated are locked for writes but not for reads, we get the Read Uncommitted isolation level, which allows reading data before it is committed.
+
+If the rows to be updated are locked for both reads and writes, we get the Read Committed level: it is forbidden to read uncommitted data, but a query can return different values if it is run more than once (non-repeatable reads).
+
+Locking the rows to be read and to be updated for all operations gives us the Repeatable Read level: a repeated query will return the same result.
+
+However, the Serializable level poses a problem: it is impossible to lock a row that does not exist yet. It leaves an opportunity for phantom reads to occur: a transaction can add a row that satisfies the condition of the previous query, and this row will appear in the next query result.
+
+### Isolation Levels in PostgreSQL
+Over time, lock-based protocols for transaction management got replaced with the Snapshot Isolation (SI) protocol. The idea behind this approach is that each transaction accesses a consistent snapshot of data as it appeared at a particular point in time. The snapshot includes all the current changes committed before the snapshot was taken.
+
+Snapshot isolation minimizes the number of required locks. In fact, a row will be locked only by concurrent update attempts. In all other cases, operations can be executed concurrently: writes never lock reads, and reads never lock anything.
+
+PostgreSQL uses a multiversion flavor of the SI protocol. Multiversion concurrency control implies that at any moment the database system can contain several versions of one and the same row, so PostgreSQL can include an appropriate version into the snapshot rather than abort transactions that attempt to read stale data.
+
+A Common Table Expression (CTE) is the result set of a query which exists temporarily and for use only within the context of a larger query. Much like a derived table, the result of a CTE is not stored and exists only for the duration of the query.
 

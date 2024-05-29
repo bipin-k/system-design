@@ -53,3 +53,11 @@ A Bloom filter uses a large bit array and multiple hash functions. Hash function
 
 Bw-Tree is layered on top of a latch-free, log-structured, access-method aware (LLAMA) storage subsystem. This layering allows Bw-Trees to grow and shrink dynamically, while leaving garbage collection and page management transparent for the tree.
 
+An alternative to stacking software layers is to skip all indirection layers and use the
+hardware directly. For example, it is possible to avoid using a filesystem and flash
+translation layer by developing for Open-Channel SSDs. This way, we can avoid at
+least two layers of logs and have more control over wear-leveling, garbage collection,
+data placement, and scheduling. One of the implementations that uses this approach
+is LOCS (LSM Tree-based KV Store on Open-Channel SSD) [ZHANG13]. Another
+example using Open-Channel SSDs is LightNVM, implemented in the Linux kernel
+[BJØRLING17].

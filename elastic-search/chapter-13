@@ -1,0 +1,7 @@
+## Chapter 13
+### Aggregations
+
+Metric aggregations allow us to use analytical functions such as sum, min, max, and avg to perform calculations on data. Bucket aggregations help us categorize data into buckets or ranges. Finally, pipeline aggregations permit us to chain aggregations. that is take metric or bucket aggregations and create new aggregations.
+
+We can also combine aggregations with queries. For example, we can run a query to fetch results and then run aggregations on that result set. These are called scoped aggregations because the input is the query’s result.
+
