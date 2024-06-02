@@ -27,6 +27,9 @@ Beam Search
 Code-Pilot, Codex, Code Llama
 
 * Multi Modal
+
 Trained on multple modalities like languages and images
 
 * Diffusion Models
+
+* Language Agents
