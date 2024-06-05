@@ -89,3 +89,33 @@ Trained on multple modalities like languages and images
 ReAct - Iterative framework where LLM emits thoughts, then acts, and observe result,
 Toolformer - Pre-TYraining techniques where strings are replaced with calls to tools that yield result,
 Bootstrapped Reasoning
+
+
+### RAG Framework
+
+Retriever
+Ranker
+Generator
+
+RAG Sequence Model
+RAG Token Model
+
+RAG Pipeline
+Ingestion -> Retrieval -> Generation
+
+RAG Evaluation
+RAG Triad
+Query -> Context -> Responsse
+Context Relevance -> Groundness -> Answer Relevance
+
+Keyword Search
+BM25 is the default similarity ranking (relevancy) algorithm in Elasticsearch. 
+
+Semantic Search
+* Dense Retrieval
+* Reranking
+
+
+
+LangChain Expression Language LCEL
+
