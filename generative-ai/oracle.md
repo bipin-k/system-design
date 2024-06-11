@@ -119,3 +119,11 @@ Semantic Search
 
 LangChain Expression Language LCEL
 
+
+
+NOMIC Embedding
+
+### Chunking
+Chunking refers to dividing a large text corpus into smaller, manageable pieces or segments. Each chunk acts as a standalone unit of information that can be individually indexed and retrieved. For instance, in the development of RAG models, as Lewis et al. (2020) described, Wikipedia articles are split into disjoint 100-word chunks to create a total of around 21 million documents that serve as the retrieval database. This technique is crucial for enhancing the efficiency and accuracy of the retrieval process, which in turn impacts the overall performance of RAG models in various aspects,
+
+HNSW Index
